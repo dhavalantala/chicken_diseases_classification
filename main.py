@@ -2,6 +2,10 @@ from cnnClassifier import logger
 from cnnClassifier.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
 from cnnClassifier.pipeline.stage_02_prepare_base_model import PrepareBaseModelTrainingPipeline
 from cnnClassifier.pipeline.stage_03_training import ModelTrainingPipeline
+from cnnClassifier.pipeline.stage_04_evaluation import EvaluationPipeline
+from cnnClassifier.config.configuration import ConfigurationManager
+
+
 
 if __name__ == '__main__':
     try:
@@ -23,12 +27,26 @@ if __name__ == '__main__':
         logger.exception(e)
         raise e
 
+
+STAGE_NAME = "Prepare Training Components"
 if __name__ == '__main__':
     try:
-        logger.info(f">>>>>>> stage training  started <<<<<<<<<")
+        logger.info(f">>>>>>> stage {STAGE_NAME} started <<<<<<<<<")
         training = ModelTrainingPipeline()
         training.main()
-        logger.info(f">>>>>>> stage training completed <<<<<<<<")
+        logger.info(f">>>>>>> stage {STAGE_NAME} completed <<<<<<<<")
+    except Exception as e:
+        logger.exception(e)
+        raise e
+
+
+STAGE_NAME = "Elalution classifier"
+if __name__ == '__main__':
+    try:
+        logger.info(f">>>>>>> stage {STAGE_NAME} started <<<<<<<<<")
+        obj = EvaluationPipeline()
+        obj.main()
+        logger.info(f">>>>>>> stage {STAGE_NAME} completed <<<<<<<<")
     except Exception as e:
         logger.exception(e)
         raise e
