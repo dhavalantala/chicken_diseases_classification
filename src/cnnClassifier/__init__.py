@@ -1,12 +1,17 @@
 import os 
 import sys 
 import logging
+import datetime
 
 logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
 
 log_dir = "logs"
-log_filepath = os.path.join(log_dir, "running_logs.log")
 os.makedirs(log_dir, exist_ok=True)
+
+logger_name = datetime.datetime.now().strftime(
+    "%H_%M_%S_%d_%m_%Y.log"
+)
+log_filepath = os.path.join(log_dir, logger_name)
 
 logging.basicConfig(
     level=logging.INFO,
