@@ -119,12 +119,23 @@ def get_size(path: Path) -> str:
 
 
 def decodeImage(imgstring, fileName):
-    imgdata = base64.b64decode(imgstring)
-    with open(fileName, 'wb') as f:
-        f.write(imgdata)
-        f.close()
+    try: 
+        imgdata = base64.b64decode(imgstring)
+        with open(fileName, 'wb') as f:
+            f.write(imgdata)
+            f.close()
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 
 def encodeImageIntoBase64(croppedImagePath):
+    """encode image into base64 string
+
+    Args:
+        croppedImagePath (str): path of the image
+
+    Returns:
+        str: base64 string of image
+    """
     with open(croppedImagePath, "rb") as f:
         return base64.b64encode(f.read())
